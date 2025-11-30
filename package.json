@@ -14,10 +14,10 @@
     "coworking",
     "kiosk"
   ],
-  "author": "Your Name",
+  "author": "onedayonepaper",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/multi-space-timer.git"
+    "url": "https://github.com/onedayonepaper/multi-space-timer.git"
   }
 }

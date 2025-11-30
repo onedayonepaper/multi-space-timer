@@ -24,7 +24,7 @@
 프로젝트 파일을 다운로드하거나 클론합니다:
 
 ```bash
-git clone https://github.com/your-username/multi-space-timer.git
+git clone https://github.com/onedayonepaper/multi-space-timer.git
 cd multi-space-timer
 ```
 
@@ -238,8 +238,8 @@ MIT License - 자유롭게 사용, 수정, 배포 가능합니다.
 
 ## 문의 및 지원
 
-- **이슈 리포팅**: [GitHub Issues](https://github.com/your-username/multi-space-timer/issues)
-- **이메일**: your-email@example.com
+- **이슈 리포팅**: [GitHub Issues](https://github.com/onedayonepaper/multi-space-timer/issues)
+- **저장소**: [GitHub Repository](https://github.com/onedayonepaper/multi-space-timer)
 
 ---
 
