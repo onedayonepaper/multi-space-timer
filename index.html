@@ -5,14 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>멀티 공간 타이머 - 어떤 공간이든 시간 관리 한 번에</title>
     <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="스터디카페, 코인세탁방, 공유오피스 등 시간 단위 공간 관리 솔루션">
+    <meta name="keywords" content="타이머,공간관리,스터디카페,세탁소,공유오피스,키오스크">
 </head>
 <body>
     <!-- 헤더 영역 -->
     <header class="header">
         <div class="header-left">
-            <h1 class="service-name">멀티 공간 타이머</h1>
+            <h1 class="service-name" id="serviceName">멀티 공간 타이머</h1>
         </div>
         <div class="header-right">
+            <button class="admin-btn" id="adminBtn" title="관리자 모드">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                </svg>
+            </button>
             <div class="current-time" id="currentTime">00:00</div>
         </div>
     </header>
@@ -22,7 +29,7 @@
         <h2 class="section-title">공간 현황</h2>
 
         <div class="spaces-grid" id="spacesGrid">
-            <!-- 16개 공간 버튼이 동적으로 생성됩니다 -->
+            <!-- 공간 카드가 동적으로 생성됩니다 -->
         </div>
     </main>
 
@@ -36,10 +43,8 @@
             <div class="modal-body">
                 <p class="modal-subtitle">이용 시간을 선택하세요</p>
 
-                <div class="time-presets">
-                    <button class="preset-btn" data-hours="1">1시간</button>
-                    <button class="preset-btn" data-hours="2">2시간</button>
-                    <button class="preset-btn" data-hours="3">3시간</button>
+                <div class="time-presets" id="timePresets">
+                    <!-- 프리셋 버튼이 동적으로 생성됩니다 -->
                 </div>
             </div>
 
@@ -50,6 +55,95 @@
         </div>
     </div>
 
-    <script src="main.js"></script>
+    <!-- 관리자 패널 -->
+    <div class="admin-overlay" id="adminPanel">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h2>관리자 설정</h2>
+                <button class="admin-close" id="adminCloseBtn">&times;</button>
+            </div>
+
+            <div class="admin-body">
+                <!-- 템플릿 선택 -->
+                <div class="admin-section">
+                    <h3>업종 템플릿</h3>
+                    <div class="template-grid" id="templateGrid">
+                        <button class="template-btn" data-template="custom">
+                            <span class="template-icon">⚙️</span>
+                            <span class="template-name">커스텀</span>
+                        </button>
+                        <button class="template-btn" data-template="studycafe">
+                            <span class="template-icon">📚</span>
+                            <span class="template-name">스터디카페</span>
+                        </button>
+                        <button class="template-btn" data-template="laundromat">
+                            <span class="template-icon">🧺</span>
+                            <span class="template-name">코인세탁</span>
+                        </button>
+                        <button class="template-btn" data-template="coworking">
+                            <span class="template-icon">🏢</span>
+                            <span class="template-name">공유오피스</span>
+                        </button>
+                        <button class="template-btn" data-template="sleepCafe">
+                            <span class="template-icon">😴</span>
+                            <span class="template-name">수면카페</span>
+                        </button>
+                        <button class="template-btn" data-template="pcBang">
+                            <span class="template-icon">🎮</span>
+                            <span class="template-name">PC방</span>
+                        </button>
+                        <button class="template-btn" data-template="karaoke">
+                            <span class="template-icon">🎤</span>
+                            <span class="template-name">노래방</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 기본 설정 -->
+                <div class="admin-section">
+                    <h3>기본 설정</h3>
+                    <div class="admin-form">
+                        <div class="form-group">
+                            <label>공간 개수</label>
+                            <select id="spaceCountInput">
+                                <option value="8">8개</option>
+                                <option value="12">12개</option>
+                                <option value="16" selected>16개</option>
+                                <option value="20">20개</option>
+                                <option value="24">24개</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>공간 이름</label>
+                            <input type="text" id="spaceNameInput" placeholder="예: 좌석, 세탁기, 회의실">
+                        </div>
+
+                        <div class="form-group">
+                            <label>사운드 알림</label>
+                            <input type="checkbox" id="soundEnabledInput">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 백업/복원 -->
+                <div class="admin-section">
+                    <h3>데이터 관리</h3>
+                    <div class="admin-actions">
+                        <button class="btn btn-secondary" id="exportBtn">설정 내보내기</button>
+                        <button class="btn btn-secondary" id="importBtn">설정 불러오기</button>
+                        <button class="btn btn-danger" id="resetAllBtn">전체 초기화</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-footer">
+                <button class="btn btn-primary" id="saveAdminBtn">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 메인 스크립트 (ES6 모듈) -->
+    <script type="module" src="./src/app.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 {
   "name": "multi-space-timer",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "멀티 공간 타이머 - 어떤 공간이든 시간 관리 한 번에",
   "main": "index.html",
   "scripts": {
